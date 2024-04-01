@@ -4,7 +4,7 @@ import { User } from './user.entity';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UserService) {}
+  constructor(private readonly usersService: UserService) { }
 
   //get all users
   @Get()
@@ -17,7 +17,7 @@ export class UsersController {
   async findOne(@Param('id') id: number): Promise<User> {
     const user = await this.usersService.findOne(id);
     if (!user) {
-      throw new NotFoundException('User does not exist!');
+      throw new NotFoundException('Incorrect user data.');
     } else {
       return user;
     }
@@ -31,7 +31,7 @@ export class UsersController {
 
   //update user
   @Put(':id')
-  async update (@Param('id') id: number, @Body() user: User): Promise<any> {
+  async update(@Param('id') id: number, @Body() user: User): Promise<any> {
     return this.usersService.update(id, user);
   }
 
@@ -41,7 +41,7 @@ export class UsersController {
     //handle error if user does not exist
     const user = await this.usersService.findOne(id);
     if (!user) {
-      throw new NotFoundException('User does not exist!');
+      throw new NotFoundException("User data doesn't match.");
     }
     return this.usersService.delete(id);
   }
