@@ -10,4 +10,15 @@ export class User {
 
     @Column()
     email: string;
+
+    @Column({ nullable: true })
+    password: string;
+
+    @Column({ nullable: true })
+    surname: string;
+
+    @Column({ nullable: true })
+    plan: string;
+
+
 }
